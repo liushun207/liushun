@@ -1,7 +1,7 @@
 package com;
 
 /**
- * 双重懒加载的单例模式
+ * 双重锁的单例模式
  */
 public class Singleton
 {
