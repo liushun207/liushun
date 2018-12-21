@@ -9,6 +9,8 @@ package com.hotspot;
  * 此代码演示2点.
  * 1. 对象可以在被GC时自我拯救
  * 2. 这种自我拯救的机会只有一次，因为一个对象的finalize()方法最多只会被系统执行一次
+ * 因为运行代价大，不确定性大，无法保证各个对象的调用顺序 所以这里作为了解，可以忘掉此方法
+ * try-finally或其他方法更好
  */
 public class FinalizeEscapeGC
 {
