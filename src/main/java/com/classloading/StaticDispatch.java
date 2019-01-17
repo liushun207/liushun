@@ -1,8 +1,3 @@
-/**
- * @author:
- * @Description:
- * @Data: 2019/1/16 17:48
- **/
 package com.classloading;
 
 /**
