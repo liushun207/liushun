@@ -1,6 +1,7 @@
 package com.concurrent;
 
 import com.util.DateUtil;
+import com.util.ScheduleManager;
 import com.util.ThreadPoolService;
 
 import java.io.BufferedReader;
@@ -56,9 +57,9 @@ public class ScheduledExecutorServiceTest
 
         // region 测试三
 
-        // ThreadPoolService.scheduleWithFixedDelay(new MyScheduledExecutor("job2"), initialDelay, period, TimeUnit.SECONDS);
-        ThreadPoolService.scheduleAtFixedRate(new MyScheduledExecutor("job2"), initialDelay, period, TimeUnit.SECONDS);
-        // ThreadPoolService.scheduleWithFixedDelay(new MyScheduledExecutor1(), initialDelay, period, TimeUnit.SECONDS);
+        // ScheduleManager.scheduleWithFixedDelay(new MyScheduledExecutor("job2"), initialDelay, period, TimeUnit.SECONDS);
+        ScheduleManager.scheduleAtFixedRate(new MyScheduledExecutor("job2"), initialDelay, period, TimeUnit.SECONDS);
+        // ScheduleManager.scheduleWithFixedDelay(new MyScheduledExecutor1(), initialDelay, period, TimeUnit.SECONDS);
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         br.readLine();
