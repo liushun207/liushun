@@ -7,7 +7,7 @@ import java.util.concurrent.*;
 /**
  * 多线程测试.
  */
-public class Test
+public class ThreadPoolTest
 {
     public static void main(String[] args)
     {

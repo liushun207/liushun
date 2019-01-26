@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Scope;
 public class TestConfiguration
 {
     /**
-     * Instantiates a new Test configuration.
+     * Instantiates a new ThreadPoolTest configuration.
      */
     public TestConfiguration()
     {
