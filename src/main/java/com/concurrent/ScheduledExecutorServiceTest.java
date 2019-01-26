@@ -1,7 +1,11 @@
 package com.concurrent;
 
 import com.util.DateUtil;
+import com.util.ThreadPoolService;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ScheduledExecutorServiceTest
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
         // region 测试一
 
@@ -37,7 +41,7 @@ public class ScheduledExecutorServiceTest
         // ScheduleAtFixedRate 是基于固定时间间隔进行任务调度，
         // ScheduleWithFixedDelay 取决于每次任务执行的时间长短，是基于不固定时间间隔进行任务调度。
 
-        ScheduledExecutorService service = Executors.newScheduledThreadPool(10);
+        // ScheduledExecutorService service = Executors.newScheduledThreadPool(10);
 
         long initialDelay = 1;
         long period = 2;
@@ -46,17 +50,26 @@ public class ScheduledExecutorServiceTest
         // service.scheduleAtFixedRate(new MyScheduledExecutor("job1"), initialDelay, period, TimeUnit.SECONDS);
 
         // ScheduleWithFixedDelay 取决于每次任务执行的时间长短，是基于不固定时间间隔进行任务调度。
-        service.scheduleWithFixedDelay(new MyScheduledExecutor("job2"), initialDelay, period, TimeUnit.SECONDS);
+        // service.scheduleWithFixedDelay(new MyScheduledExecutor("job2"), initialDelay, period, TimeUnit.SECONDS);
 
         // endregion
 
+        // region 测试三
 
+        ThreadPoolService.scheduleWithFixedDelay(new MyScheduledExecutor("job2"), initialDelay, period, TimeUnit.SECONDS);
+        // ThreadPoolService.scheduleWithFixedDelay(new MyScheduledExecutor1(), initialDelay, period, TimeUnit.SECONDS);
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        br.readLine();
+
+        // endregion
     }
 
     static class MyScheduledExecutor implements Runnable
     {
-
         private String jobName;
+
+        private static volatile boolean flag = true;
 
         MyScheduledExecutor()
         {
@@ -71,15 +84,55 @@ public class ScheduledExecutorServiceTest
         @Override
         public void run()
         {
-            try
+            if(flag)
             {
-                Thread.sleep(1000 * 2);
-                System.out.println(jobName + " is running " + DateUtil.getTodayByFormat());
+                flag = false;
+
+                int a = 1;
+                int b = 0;
+
+                try
+                {
+                    int c = a / b;
+                }
+                catch(Exception e)
+                {
+                    return;
+                }
             }
-            catch(InterruptedException e)
-            {
-                e.printStackTrace();
-            }
+
+            System.out.println(jobName + "-" + flag + " is running " + DateUtil.getTodayByFormat());
+
+            // try
+            // {
+            //     Thread.sleep(1000 * 2);
+            //     System.out.println(jobName + " is running " + DateUtil.getTodayByFormat());
+            // }
+            // catch(InterruptedException e)
+            // {
+            //     e.printStackTrace();
+            // }
+        }
+    }
+
+    static class MyScheduledExecutor1 implements Runnable
+    {
+        private String jobName;
+
+        @Override
+        public void run()
+        {
+            System.out.println(Thread.currentThread().getId() +  "线程 is running " + DateUtil.getTodayByFormat());
+
+            // try
+            // {
+            //     Thread.sleep(1000 * 2);
+            //     System.out.println(jobName + " is running " + DateUtil.getTodayByFormat());
+            // }
+            // catch(InterruptedException e)
+            // {
+            //     e.printStackTrace();
+            // }
         }
     }
 }
