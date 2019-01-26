@@ -51,7 +51,7 @@ public class ThreadPoolService
 
     /**
      * 基于固定时间间隔进行任务调度.
-     * @param command 要执行的任务
+     * @param command 要执行的任务, 注意捕捉异常
      * @param initialDelay 初始延迟
      * @param period 周期
      * @param unit 周期时间单位
@@ -68,8 +68,7 @@ public class ThreadPoolService
     /**
      * 取决于每次任务执行的时间长短，是基于不固定时间间隔进行任务调度.
      * 以上一次任务的结束时间计算下一次任务的开始时间
-     * 如果上一个任务挂了会阻塞当前线程的任务
-     * @param command 要执行的任务
+     * @param command 要执行的任务, 注意捕捉异常
      * @param initialDelay 初始延迟
      * @param delay 延迟时间（上次任务完成结束后的时间 再延迟 delay 执行）
      * @param unit 周期时间单位
