@@ -5,10 +5,12 @@
  **/
 package com.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 工具.
@@ -193,4 +195,164 @@ public class ToolUtil
     }
 
     // endregion
+
+    /**
+     * 获取本机外网ip
+     */
+    public static String getV4IP()
+    {
+        String ipUrl = "http://www.ip138.com/ips1388.asp";
+
+        String ip = "";
+
+        HttpURLConnection urlConnection = null;
+        BufferedReader in = null;
+
+        try
+        {
+            URL url = new URL(ipUrl);
+            urlConnection = (HttpURLConnection) url.openConnection();
+
+            // 请求链接超时的时间
+            urlConnection.setConnectTimeout(2000);
+
+            // 读取数据超时的时间
+            urlConnection.setReadTimeout(2000);
+
+            in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), StandardCharsets.UTF_8));
+
+            StringBuilder inputLine = new StringBuilder();
+            String read = "";
+
+            while((read = in.readLine()) != null)
+            {
+                inputLine.append(read + "\r\n");
+            }
+
+            Pattern p = Pattern.compile("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}");
+            Matcher m = p.matcher(inputLine.toString());
+            if(m.find())
+            {
+                ip = m.group();
+            }
+
+            return ip;
+        }
+        catch(Exception e)
+        {
+            return ip;
+        }
+        finally
+        {
+            if(in != null)
+            {
+                try
+                {
+                    in.close();
+                }
+                catch(IOException e)
+                {
+                }
+            }
+
+            if(urlConnection != null)
+            {
+                urlConnection.disconnect();
+            }
+        }
+    }
+
+    /**
+     * 获取本机MAC地址
+     */
+    public static String getMACAddress() throws Exception
+    {
+        //获取本地IP对象
+        InetAddress ipAddress = InetAddress.getLocalHost();
+
+        // 获得网络接口对象（即网卡），并得到mac地址，mac地址存在于一个byte数组中。
+        byte[] mac = NetworkInterface.getByInetAddress(ipAddress).getHardwareAddress();
+
+        // 下面代码是把mac地址拼装成String
+        StringBuffer sb = new StringBuffer();
+
+        for(int i = 0; i < mac.length; i++)
+        {
+            if(i != 0)
+            {
+                sb.append(":");
+            }
+            // mac[i] & 0xFF 是为了把byte转化为正整数
+            String s = Integer.toHexString(mac[i] & 0xFF);
+
+            sb.append(s.length() == 1 ? 0 + s : s);
+        }
+
+        //把字符串所有小写字母改为大写成为正规的mac地址并返回
+        return sb.toString().toUpperCase();
+    }
+
+    // 获取mac地址
+    public static String getMacAddress()
+    {
+        try
+        {
+            Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
+            byte[] mac = null;
+            while(allNetInterfaces.hasMoreElements())
+            {
+                NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
+
+                // 把一些非物理网卡或无用网上过滤掉，然后再取网上的IPV4地址即可。
+                if(netInterface.isLoopback() || netInterface.isVirtual() || netInterface.isPointToPoint() || !netInterface.isUp())
+                {
+                    continue;
+                }
+                else
+                {
+                    mac = netInterface.getHardwareAddress();
+                    if(mac != null)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        for(int i = 0; i < mac.length; i++)
+                        {
+                            sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? ":" : ""));
+                        }
+
+                        if(sb.length() > 0)
+                        {
+                            return sb.toString();
+                        }
+                    }
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            //_logger.error("MAC地址获取失败", e);
+        }
+        return "";
+    }
+
+    public static void main(String[] args)
+    {
+        try
+        {
+            for(int i = 0; i < 5000; i++)
+            {
+                String ip = getMACAddress();
+                System.out.println(ip);
+            }
+
+            // for(int i = 0; i < 5000; i++)
+            // {
+            //     String ip1 = getMACAddress();
+            //     System.out.println(ip1);
+            // }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
