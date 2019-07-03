@@ -347,11 +347,9 @@ public class ToolUtil {
         List<Integer> result = new ArrayList<>();
 
         // 从右到左计算
-        while(index >= 0)
-        {
-            if(strArr[index] == '1')
-            {
-                int val = (int)Math.pow(2, strArr.length - index - 1);
+        while(index >= 0) {
+            if(strArr[index] == '1') {
+                int val = (int) Math.pow(2, strArr.length - index - 1);
 
                 result.add(val);
             }
@@ -366,14 +364,25 @@ public class ToolUtil {
         return b;
     }
 
+    /**
+     * 单对象转list.
+     * @param <T> the type parameter
+     * @param list the list
+     * @return the list
+     */
+    public static <T> List<T> toList(T... list) {
+        List<T> result = new ArrayList<>();
+
+        Collections.addAll(result, list);
+
+        return result;
+    }
+
     public static void main(String[] args) {
         try {
 
-
-            System.out.println(exponent(15));
-            System.out.println(exponent(3));
-            System.out.println(exponent(5));
-            System.out.println(exponent(12));
+            List<Integer> list = toList(1);
+            System.out.println(list);
 
             // String str = "05030841b741a3000042686856";
             //
