@@ -340,10 +340,13 @@ public class ToolUtil {
             return null;
         }
 
+        // 转二进制 char数组
         char[] strArr = Integer.toBinaryString(num).toCharArray();
         int index = strArr.length - 1;
 
         List<Integer> result = new ArrayList<>();
+
+        // 从右到左计算
         while(index >= 0)
         {
             if(strArr[index] == '1')
