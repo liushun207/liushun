@@ -381,8 +381,10 @@ public class ToolUtil {
     public static void main(String[] args) {
         try {
 
-            List<Integer> list = toList(1);
-            System.out.println(list);
+            Long a = 127L;
+            Long b = 127L;
+            System.out.println(a.equals(b));
+            System.out.println(a == b);
 
             // String str = "05030841b741a3000042686856";
             //
