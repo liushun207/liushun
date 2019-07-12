@@ -68,7 +68,7 @@ public class IdWorker {
      * @param workerId     工作机器 ID
      * @param datacenterId 序列号
      */
-    public static void initSequence(long workerId, long datacenterId) {
+    public static void initSequence(long workerId, long datacenterId) throws Exception {
         WORKER = new Sequence(workerId, datacenterId);
     }
 

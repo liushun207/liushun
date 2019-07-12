@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -381,10 +382,10 @@ public class ToolUtil {
     public static void main(String[] args) {
         try {
 
-            Long a = 127L;
-            Long b = 127L;
-            System.out.println(a.equals(b));
-            System.out.println(a == b);
+            List<String> a = new ArrayList<>();
+            a.add("1");
+            a.add("2");
+            a.add("3");
 
             // String str = "05030841b741a3000042686856";
             //
@@ -394,7 +395,7 @@ public class ToolUtil {
 
             // Float value = Float.intBitsToFloat(Integer.parseInt(str, 16));
 
-            //System.out.println(byteStr);
+            System.out.println();
 
 
             // for(int i = 0; i < 5000; i++)
