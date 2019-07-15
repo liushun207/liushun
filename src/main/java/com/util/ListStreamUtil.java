@@ -14,8 +14,18 @@ import java.util.stream.Stream;
 
 /**
  * 集合流处理工具.
+ * @author les
  */
 public class ListStreamUtil {
+    /**
+     * 集合有值.
+     * @param source 源
+     * @return true->有值，false->null或空
+     */
+    public static boolean hasSize(List source) {
+        return source != null && !source.isEmpty();
+    }
+
     /**
      * 获取单元素.
      * @param <T> 源类型
