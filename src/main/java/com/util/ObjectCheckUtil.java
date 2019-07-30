@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
 
-@Log4j2
+// @Log4j2
 public class ObjectCheckUtil {
     /**
      * 判断对象中属性值是否全为空
@@ -26,7 +26,7 @@ public class ObjectCheckUtil {
             }
         }
         catch(Exception e) {
-            log.error("", e);
+            // log.error("", e);
         }
 
         return true;

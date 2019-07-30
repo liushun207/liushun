@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 /**
  * HttpServletResponse帮助类
  */
-@Log4j2
+// @Log4j2
 public final class ResponseUtil {
     /**
      * 发送文本。使用UTF-8编码。
