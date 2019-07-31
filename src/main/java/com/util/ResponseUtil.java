@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 /**
  * HttpServletResponse帮助类
  */
-@Log4j2
+// @Log4j2
 public final class ResponseUtil {
     /**
      * 发送文本。使用UTF-8编码。
@@ -40,9 +40,9 @@ public final class ResponseUtil {
 
     /**
      * 发送内容。使用UTF-8编码。
-     * @param response
-     * @param contentType
-     * @param text
+     * @param response the response
+     * @param contentType the content type
+     * @param text the text
      */
     public static void render(HttpServletResponse response, String contentType, String text) {
         response.setContentType(contentType);

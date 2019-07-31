@@ -7,19 +7,15 @@ import java.util.NoSuchElementException;
 /**
  * 工具
  **/
-public class Util
-{
+public class Util {
     /**
      * 求集合最大值
-     *
-     * @param <T>        实现了`Comparable`的泛型类型
+     * @param <T> 实现了`Comparable`的泛型类型
      * @param collection 集合
      * @return 集合最大值
      */
-    public  static <T extends Comparable> T max(Collection<T> collection)
-    {
-        if(collection == null || collection.isEmpty())
-        {
+    public static <T extends Comparable> T max(Collection<T> collection) {
+        if(collection == null || collection.isEmpty()) {
             throw new NoSuchElementException();
         }
 
@@ -30,13 +26,11 @@ public class Util
         T largest = iterator.next();
 
         // 循环计算最大值
-        while (iterator.hasNext())
-        {
+        while(iterator.hasNext()) {
             T next = iterator.next();
 
             // 比较值大小，如果，小于0，next大，更新最大的值
-            if (largest.compareTo(next) < 0)
-            {
+            if(largest.compareTo(next) < 0) {
                 largest = next;
             }
         }

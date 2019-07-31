@@ -1,7 +1,5 @@
 package com.util;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 
@@ -12,7 +10,7 @@ import java.util.List;
 /**
  * The type Object convert util.
  */
-@Log4j2
+// @Log4j2
 public class ObjectConvertUtil {
 
     /**
@@ -37,36 +35,10 @@ public class ObjectConvertUtil {
             }
         }
         catch(Exception e) {
-            log.error("", e);
+            // log.error("", e);
         }
 
         return result;
-    }
-
-    /**
-     * page 转换
-     * @param <S> the type parameter
-     * @param <R> the type parameter
-     * @param source the source
-     * @param clazz the clazz
-     * @return the page
-     */
-    public static <S, R> Page<R> convertToPage(IPage<S> source, Class<R> clazz) {
-        if(source == null) {
-            return null;
-        }
-
-        List<S> customers = source.getRecords();
-        List<R> list = ObjectConvertUtil.convert(customers, clazz);
-
-        Page<R> newPage = new Page<>();
-        newPage.setRecords(list);
-        newPage.setCurrent(source.getCurrent());
-        newPage.setTotal(source.getTotal());
-        newPage.setPages(source.getPages());
-        newPage.setSize(source.getSize());
-
-        return newPage;
     }
 
     /**
