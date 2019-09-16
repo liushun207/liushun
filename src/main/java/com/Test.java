@@ -5,34 +5,32 @@
  **/
 package com;
 
-class Message<T extends Number> {
-    private T message;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-    public T getMessage() {
-        return message;
-    }
+interface ITest {
 
-    public void setMessage(T message) {
-        this.message = message;
-    }
+}
+
+class Message implements ITest {
+
 }
 
 public class Test {
 
     public static void main(String[] args) {
-        Message<Integer> message = new Message();
-        message.setMessage(55);
-        fun(message);
-    }
+        // LocalDateTime dateTime = LocalDateTime.of(2017, 10, 22, 10, 10, 10);
+        // System.out.println(LocalDateTime.now().isAfter(dateTime));
+        //
+        // Long a = null;
+        // System.out.println(a > 0);
 
-    /**
-     * 此时使用通配符"?"描述的是它可以接收任意类型，但是由于不确定类型，所以无法修改
-     * @param temp
-     */
-    public static void fun(Message<? extends Number> temp) {
-        //仍然无法修改！
-        // temp.setMessage(100);
-        System.out.println(temp.getMessage());
+      long a= -1;
+      long b = 3;
+
+        System.out.println(a + b);
+
     }
 }
 
