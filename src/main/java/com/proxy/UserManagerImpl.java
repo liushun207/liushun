@@ -4,7 +4,7 @@ import java.text.MessageFormat;
 
 /**
  * The type User manager.
- * @author les
+ * @author liushun
  */
 public class UserManagerImpl implements IUserManager {
     /**

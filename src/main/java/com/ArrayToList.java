@@ -1,8 +1,3 @@
-/**
- * @author:
- * @Description:
- * @Data: 2018/11/25 0025 17:48
- **/
 package com;
 
 import java.util.ArrayList;
@@ -12,6 +7,10 @@ import java.util.List;
  * 数组转集合.
  */
 public class ArrayToList {
+    /**
+     * The entry point of application.
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(1);

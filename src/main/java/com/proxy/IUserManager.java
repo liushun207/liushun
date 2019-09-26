@@ -2,7 +2,7 @@ package com.proxy;
 
 /**
  * 用户接口
- * @author les
+ * @author liushun
  */
 public interface IUserManager {
     /**

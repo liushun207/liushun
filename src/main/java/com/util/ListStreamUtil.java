@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 /**
  * 集合流处理工具.
- * @author les
+ * @author liushun
  */
 public class ListStreamUtil {
     /**

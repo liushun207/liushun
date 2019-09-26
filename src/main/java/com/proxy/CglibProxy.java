@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 
 /**
  * spring Cglib 动态代理测试.
- * @author les
+ * @author liushun
  */
 public class CglibProxy implements MethodInterceptor {
     /**
