@@ -14,7 +14,6 @@ public class Volatile implements Runnable {
     @Override
     public void run() {
         while(flag) {
-            System.out.println(Thread.currentThread().getName() + "正在运行。。。");
         }
 
         System.out.println(Thread.currentThread().getName() + "执行完毕");
