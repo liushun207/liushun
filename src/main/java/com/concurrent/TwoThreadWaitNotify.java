@@ -4,7 +4,7 @@ package com.concurrent;
  * 等待通知机制(线程通信方式)
  * 两个线程通过对同一对象调用等待 wait() 和通知 notify() 方法来进行通讯。
  * 如两个线程交替打印奇偶数
- * @author liushun
+ * @author les
  */
 public class TwoThreadWaitNotify {
     private int start = 1;
