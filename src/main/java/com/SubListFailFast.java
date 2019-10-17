@@ -24,7 +24,8 @@ public class SubListFailFast
         System.out.println(masterList);
         System.out.println(branchList);
 
-        // 下面三行代码，如果不注释，则会导致branchList操作出现ConcurrentModificationException异常
+        // 下面三行代码直接操作父列表，删除或增加 都会导致子列表fail-fast异常
+        // 如果不注释，则会导致branchList操作出现ConcurrentModificationException异常
         //masterList.remove(0);
         //masterList.add("ten");
         //masterList.clear();
