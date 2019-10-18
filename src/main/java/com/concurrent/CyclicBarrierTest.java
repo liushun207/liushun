@@ -36,13 +36,19 @@ public class CyclicBarrierTest {
             try {
                 System.out.println("No." + seq + " 乘客，开始上车。。。");
 
+                if(seq == 2){
+                    Thread.sleep(5000);
+                }
+
                 // 调用await方法的线程告诉CyclicBarrier自己已经到达同步点，然后当前线程被阻塞
                 cyclicBarrier.await();
 
                 System.out.println("No." + seq + " 乘客，上车中。。。");
 
                 // 这里用Thread.sleep()来模拟业务处理
-                Thread.sleep(1000);
+                // if(seq == 2){
+                //     Thread.sleep(2000);
+                // }
 
                 System.out.println("No." + seq + " 乘客，完成");
             } catch(Exception e) {

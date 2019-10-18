@@ -5,10 +5,6 @@
  **/
 package com;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 interface ITest {
 
 }
@@ -26,11 +22,17 @@ public class Test {
         // Long a = null;
         // System.out.println(a > 0);
 
-      long a= -1;
-      long b = 3;
+        retry:
+        for(int i = 0; i < 10; i++) {
+            if(i == 5){
+                // continue retry;
+                break retry;
+            }
 
-        System.out.println(a + b);
+            System.out.println(i);
+        }
 
+        System.out.println("结束");
     }
 }
 

@@ -2,22 +2,17 @@ package com.concurrent;
 
 import com.util.DateUtil;
 import com.util.ScheduleManager;
-import com.util.ThreadPoolService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
  * 周期性执行.
  */
-public class ScheduledExecutorServiceTest
-{
-    public static void main(String[] args) throws IOException
-    {
+public class ScheduledExecutorServiceTest {
+    public static void main(String[] args) throws IOException {
         // region 测试一
 
         // ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
@@ -67,38 +62,30 @@ public class ScheduledExecutorServiceTest
         // endregion
     }
 
-    static class MyScheduledExecutor implements Runnable
-    {
+    static class MyScheduledExecutor implements Runnable {
         private String jobName;
 
         private static volatile boolean flag = true;
 
-        MyScheduledExecutor()
-        {
+        MyScheduledExecutor() {
 
         }
 
-        MyScheduledExecutor(String jobName)
-        {
+        MyScheduledExecutor(String jobName) {
             this.jobName = jobName;
         }
 
         @Override
-        public void run()
-        {
-            if(flag)
-            {
+        public void run() {
+            if(flag) {
                 flag = false;
 
                 int a = 1;
                 int b = 0;
 
-                try
-                {
+                try {
                     int c = a / b;
-                }
-                catch(Exception e)
-                {
+                } catch(Exception e) {
                     return;
                 }
             }
@@ -117,14 +104,12 @@ public class ScheduledExecutorServiceTest
         }
     }
 
-    static class MyScheduledExecutor1 implements Runnable
-    {
+    static class MyScheduledExecutor1 implements Runnable {
         private String jobName;
 
         @Override
-        public void run()
-        {
-            System.out.println(Thread.currentThread().getId() +  "线程 is running " + DateUtil.getTodayByFormat());
+        public void run() {
+            System.out.println(Thread.currentThread().getId() + "线程 is running " + DateUtil.getTodayByFormat());
 
             // try
             // {
