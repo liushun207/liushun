@@ -65,28 +65,64 @@ public class MergeSort {
         // 递归分割右边数组
         sort(arr, mid + 1, high);
 
-        // 合并两个数组
+        // // 将arr[low...mid]和A[mid+1...high]合并为A[low...high]
         merge(arr, low, mid, high);
     }
 
     /**
-     * 合并
-     * @param arr
+     * 合并 将arr[low...mid]和A[mid+1...high]合并为A[low...high]
+     * @param arr 合并好的有序数组，需要放到这个位置上
      * @param low
      * @param mid
      * @param high
      */
     private static void merge(int[] arr, int low, int mid, int high) {
-        int length = arr.length;
+        int i = low;
+        int j = mid + 1;
+        int k = 0;
+        int length = high - low + 1;
 
-        //辅助数组
+        // 临时数组
         int[] tmp = new int[length];
 
-        // p1、p2是检测指针，k是存放指针
-        int p1 = low, p2 = mid + 1, k = high;
+        // 最少把一个数组中的数据取完。
+        while(i <= mid && j <= high) {
+            // 对比两个数组，小的放左边 大的放右边
+            if(arr[i] <= arr[j]) {
+                // 小于等于，则放入 arr[i] 元素，继续对比 i++ 和 arr[j]
+                tmp[k++] = arr[i++];
+            } else {
+                // 大于，则放入 arr[j] 元素，继续对比 j++ 和 arr[i]
+                tmp[k++] = arr[j++];
+            }
+        }
 
+        // 判断哪个子数组中有剩余的数据。
+        int start = i;
+        int end = mid;
+        if(j <= high) {
+            start = j;
+            end = high;
+        }
 
+        // 将剩余的数据copy到临时数组 tmp。
+        while(start <= end) {
+            tmp[k++] = arr[start++];
+        }
+
+        //将 tmp 中的数据拷贝回 a 中
+        System.arraycopy(tmp, 0, arr, low, length);
     }
 
     // endregion
+
+    public static void main(String[] args) {
+        int[] arr = {78, 33, 20, 43, 22, 71, 40, 93, 20, 50};
+
+        MergeSort.sort(arr);
+
+        for(int i = 0, len = arr.length; i < len; i++) {
+            System.out.println(arr[i]);
+        }
+    }
 }
