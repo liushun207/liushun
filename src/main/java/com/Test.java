@@ -6,33 +6,39 @@
 package com;
 
 interface ITest {
+    /**
+     * default 默认方法可以实现 可以不实现
+     * 如果 实现类继承了2个接口 有相同的默认实现 则必须实现
+     * @return
+     */
+    default String test1() {
+        return "hello";
+    }
 
+    /**
+     * 接口中静态方法 实现类不能调用
+     * @return
+     */
+    static String test2() {
+        return "test2";
+    }
 }
 
 class Message implements ITest {
-
+    @Override
+    public String test1() {
+        return ITest.test2();
+    }
 }
 
 public class Test {
 
     public static void main(String[] args) {
-        // LocalDateTime dateTime = LocalDateTime.of(2017, 10, 22, 10, 10, 10);
-        // System.out.println(LocalDateTime.now().isAfter(dateTime));
-        //
-        // Long a = null;
-        // System.out.println(a > 0);
 
-        retry:
-        for(int i = 0; i < 10; i++) {
-            if(i == 5){
-                // continue retry;
-                break retry;
-            }
+        Message message = new Message();
 
-            System.out.println(i);
-        }
-
-        System.out.println("结束");
+        System.out.println(message.test1());
+        System.out.println(ITest.test2());
     }
 }
 

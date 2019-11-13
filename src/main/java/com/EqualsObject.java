@@ -6,8 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * 测试只重写 equals 而不重写 hashcode
+ * 默认的hashCode() 是根据对象的地址算出int的
  * 1.如果两个对象的`equals`的结果是相等的，则两个对象的`hashCode`的返回结果必须是相等的.
- * 2. 任何时候覆写了`equals`，都必须同时覆写`hashCode`
+ * 2.任何时候覆写了`equals`，都必须同时覆写`hashCode`
  * @author liushun
  */
 @Data

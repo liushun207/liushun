@@ -16,11 +16,11 @@ public class JdkProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        //System.out.println("JDK动态代理，监听开始！");
+        System.out.println("JDK动态代理，监听开始！");
 
         Object result = method.invoke(target, args);
 
-        //System.out.println("JDK动态代理，监听结束！");
+        System.out.println("JDK动态代理，监听结束！");
 
         return result;
     }

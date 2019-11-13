@@ -53,7 +53,8 @@ public class StringTest {
     }
 
     public static void main(String[] args) {
-        method(stringStatic);
-        System.out.println(stringStatic);
+        // method(stringStatic);
+        // System.out.println(stringStatic);
+        test1();
     }
 }

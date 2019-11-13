@@ -15,6 +15,10 @@ public class ArrayToList {
         List<Integer> list = new ArrayList<>();
         list.add(1);
 
+        int oldCapacity = 10;
+        int newCapacity = oldCapacity + (oldCapacity >> 1);
+        System.out.println(newCapacity);
+
         // String[] strings = new  String[3];
         //
         // strings[0] = "one";
