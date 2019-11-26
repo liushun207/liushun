@@ -3,7 +3,7 @@
  * @Description:
  * @Data: 2018/11/25 0025 17:51
  **/
-package com;
+package com.collection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
