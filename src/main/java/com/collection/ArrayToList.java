@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 数组转集合.
  */
 public class ArrayToList {
+
     /**
      * The entry point of application.
      * @param args the input arguments
@@ -14,10 +15,11 @@ public class ArrayToList {
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         list.add(1);
-
         int oldCapacity = 10;
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         System.out.println(newCapacity);
+
+        System.out.println(Integer.MAX_VALUE - (1 << 30));
 
         // String[] strings = new  String[3];
         //

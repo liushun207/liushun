@@ -26,6 +26,7 @@ public class DeadLockDemo {
             public void run() {
                 synchronized(A) {
                     try {
+                        // 休眠2秒 等待 线程2执行
                         Thread.sleep(2000);
                     } catch(InterruptedException ex) {
                         ex.printStackTrace();
