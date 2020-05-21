@@ -2,17 +2,20 @@ package com;
 
 import lombok.Data;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
  * 银行
  **/
 @Data
-public class Bank
-{
+public class Bank {
     private String name;
     private String address;
     private int age;
+
+    private final Map<String, Integer> map = new HashMap<>();
 
     public Bank(String name, String address, int age) {
         this.name = name;
