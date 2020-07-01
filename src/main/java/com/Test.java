@@ -5,6 +5,8 @@
  **/
 package com;
 
+import org.apache.commons.lang3.StringUtils;
+
 interface ITest {
     /**
      * default 默认方法可以实现 可以不实现
@@ -35,10 +37,15 @@ public class Test {
 
     public static void main(String[] args) {
 
-        Message message = new Message();
+        // Message message = new Message();
+        //
+        // System.out.println(message.test1());
+        // System.out.println(ITest.test2());
 
-        System.out.println(message.test1());
-        System.out.println(ITest.test2());
+        String str = "1234567890";
+
+        String substring = StringUtils.substring(str, 5, 7);
+        System.out.println(substring);
     }
 }
 
