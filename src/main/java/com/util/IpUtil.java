@@ -3,7 +3,7 @@ package com.util;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * ip¹¤¾ß
+ * ipå·¥å…·
  */
 public class IpUtil {
     private IpUtil() {
@@ -14,35 +14,35 @@ public class IpUtil {
     public static String getIPAddress(HttpServletRequest request) {
         String ip = null;
 
-        //X-Forwarded-For£ºSquid ·şÎñ´úÀí
+        //X-Forwarded-Forï¼šSquid æœåŠ¡ä»£ç†
         String ipAddresses = request.getHeader("X-Forwarded-For");
 
         if(ipAddresses == null || ipAddresses.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
-            //Proxy-Client-IP£ºapache ·şÎñ´úÀí
+            //Proxy-Client-IPï¼šapache æœåŠ¡ä»£ç†
             ipAddresses = request.getHeader("Proxy-Client-IP");
         }
 
         if(ipAddresses == null || ipAddresses.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
-            //WL-Proxy-Client-IP£ºweblogic ·şÎñ´úÀí
+            //WL-Proxy-Client-IPï¼šweblogic æœåŠ¡ä»£ç†
             ipAddresses = request.getHeader("WL-Proxy-Client-IP");
         }
 
         if(ipAddresses == null || ipAddresses.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
-            //HTTP_CLIENT_IP£ºÓĞĞ©´úÀí·şÎñÆ÷
+            //HTTP_CLIENT_IPï¼šæœ‰äº›ä»£ç†æœåŠ¡å™¨
             ipAddresses = request.getHeader("HTTP_CLIENT_IP");
         }
 
         if(ipAddresses == null || ipAddresses.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
-            //X-Real-IP£ºnginx·şÎñ´úÀí
+            //X-Real-IPï¼šnginxæœåŠ¡ä»£ç†
             ipAddresses = request.getHeader("X-Real-IP");
         }
 
-        //ÓĞĞ©ÍøÂçÍ¨¹ı¶à²ã´úÀí£¬ÄÇÃ´»ñÈ¡µ½µÄip¾Í»áÓĞ¶à¸ö£¬Ò»°ã¶¼ÊÇÍ¨¹ı¶ººÅ£¨,£©·Ö¸î¿ªÀ´£¬²¢ÇÒµÚÒ»¸öipÎª¿Í»§¶ËµÄÕæÊµIP
+        //æœ‰äº›ç½‘ç»œé€šè¿‡å¤šå±‚ä»£ç†ï¼Œé‚£ä¹ˆè·å–åˆ°çš„ipå°±ä¼šæœ‰å¤šä¸ªï¼Œä¸€èˆ¬éƒ½æ˜¯é€šè¿‡é€—å·ï¼ˆ,ï¼‰åˆ†å‰²å¼€æ¥ï¼Œå¹¶ä¸”ç¬¬ä¸€ä¸ªipä¸ºå®¢æˆ·ç«¯çš„çœŸå®IP
         if(ipAddresses != null && ipAddresses.length() != 0) {
             ip = ipAddresses.split(",")[0];
         }
 
-        //»¹ÊÇ²»ÄÜ»ñÈ¡µ½£¬×îºóÔÙÍ¨¹ırequest.getRemoteAddr();»ñÈ¡
+        //è¿˜æ˜¯ä¸èƒ½è·å–åˆ°ï¼Œæœ€åå†é€šè¿‡request.getRemoteAddr();è·å–
         if(ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ipAddresses)) {
             ip = request.getRemoteAddr();
         }
