@@ -71,5 +71,6 @@ public class HappyNum {
         System.out.println(i1);
         System.out.println(i2);
         System.out.println(i2/10);
+        System.out.println(isHappy(19));
     }
 }

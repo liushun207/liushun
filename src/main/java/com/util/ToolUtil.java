@@ -5,19 +5,63 @@
  **/
 package com.util;
 
-import java.io.*;
-import java.math.BigDecimal;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * 工具.
+ * @author liushun
  */
 public class ToolUtil {
+
+    public static String getUUID() {
+        String s = UUID.randomUUID().toString();
+        //生成形如：550E8400-E29B-11D4-A716-446655440000
+        //去掉“-”符号
+        return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18) + s.substring(19, 23) + s.substring(24);
+    }
+
+    public static String getUUID1() {
+        String uuid = UUID.randomUUID().toString();
+        //生成形如：550E8400-E29B-11D4-A716-446655440000
+        //去掉“-”符号
+        return uuid.replaceAll("-", "");
+    }
+
+    /**
+     * 获取最后一个元素
+     * @param map 源
+     * @param <K> key
+     * @param <V> value
+     * @return Map.Entry<K, V>
+     */
+    public static <K, V> Map.Entry<K, V> getTailByReflection(LinkedHashMap<K, V> map) {
+        if(map == null || map.isEmpty()) {
+            return null;
+        }
+
+        Field tail = null;
+        try {
+            tail = map.getClass().getDeclaredField("tail");
+            tail.setAccessible(true);
+            return (Map.Entry<K, V>) tail.get(map);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     /**
      * 将16进制转换为二进制.
      * @param hexStr the hex str
@@ -94,8 +138,7 @@ public class ToolUtil {
         try {
             float result = Float.intBitsToFloat(Integer.parseInt(hexStr, 16));
             return result;
-        }
-        catch(Exception ex) {
+        } catch(Exception ex) {
             return -1f;
         }
     }
@@ -230,16 +273,13 @@ public class ToolUtil {
             }
 
             return ip;
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             return ip;
-        }
-        finally {
+        } finally {
             if(in != null) {
                 try {
                     in.close();
-                }
-                catch(IOException e) {
+                } catch(IOException e) {
                 }
             }
 
@@ -287,8 +327,7 @@ public class ToolUtil {
                 // 把一些非物理网卡或无用网上过滤掉，然后再取网上的IPV4地址即可。
                 if(netInterface.isLoopback() || netInterface.isVirtual() || netInterface.isPointToPoint() || !netInterface.isUp()) {
                     continue;
-                }
-                else {
+                } else {
                     mac = netInterface.getHardwareAddress();
                     if(mac != null) {
                         StringBuilder sb = new StringBuilder();
@@ -302,8 +341,7 @@ public class ToolUtil {
                     }
                 }
             }
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             //_logger.error("MAC地址获取失败", e);
         }
         return "";
@@ -409,8 +447,7 @@ public class ToolUtil {
             //     String ip1 = getMACAddress();
             //     System.out.println(ip1);
             // }
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }
