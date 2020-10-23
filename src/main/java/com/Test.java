@@ -47,7 +47,7 @@ public class Test {
 
     public static void main(String[] args) {
         System.out.println("测试冲突");
-
+        long threadId = Thread.currentThread().getId();
         List<String> orderNos = Collections.synchronizedList(new ArrayList<String>());
         // 并发操作
         IntStream.range(0,100).parallel().forEach(i->{
