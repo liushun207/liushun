@@ -5,13 +5,15 @@
  **/
 package com;
 
-import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.Maps;
 import com.util.ToolUtil;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 interface ITest {
     /**
@@ -44,6 +46,20 @@ public class Test {
     private static LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
     public static void main(String[] args) {
+        List<String> orderNos = Collections.synchronizedList(new ArrayList<String>());
+        // 并发操作
+        IntStream.range(0,100).parallel().forEach(i->{
+            orderNos.add(Thread.currentThread().getId() + "-" + LocalDateTime.now());
+        });
+
+        List<String> filterOrderNos = orderNos.stream().distinct().collect(Collectors.toList());
+
+        System.out.println("总数："+orderNos.size());
+        System.out.println("过滤重复后总数："+filterOrderNos.size());
+
+
+        // long threadId = Thread.currentThread().getId();
+        // System.out.println(threadId);
 
         // String str1 = "  ";
         // if(StringUtils.isBlank(str1)){
@@ -56,7 +72,9 @@ public class Test {
 
 
         // Message message = new Message();
-        //
+        // System.out.println(message instanceof Message);
+        // System.out.println(message instanceof ITest);
+
         // System.out.println(message.test1());
         // System.out.println(ITest.test2());
         //
@@ -152,11 +170,11 @@ public class Test {
         //
         // System.out.println(a.replaceAll("\n", "").length());
 
-        long start = System.currentTimeMillis();
-        for(int i = 0; i < 1000000; i++) {
-            ToolUtil.getUUID();
-        }
-        System.out.println("ToolUtil.getUUID() = " + ((System.currentTimeMillis() - start)) + " millisecond");
+        // long start = System.currentTimeMillis();
+        // for(int i = 0; i < 1000000; i++) {
+        //     ToolUtil.getUUID();
+        // }
+        // System.out.println("ToolUtil.getUUID() = " + ((System.currentTimeMillis() - start)) + " millisecond");
 
         // System.out.println(ToolUtil.getUUID());
         // System.out.println("===================");
