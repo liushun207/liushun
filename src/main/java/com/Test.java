@@ -46,6 +46,8 @@ public class Test {
     private static LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
     public static void main(String[] args) {
+        System.out.println("测试冲突");
+
         List<String> orderNos = Collections.synchronizedList(new ArrayList<String>());
         // 并发操作
         IntStream.range(0,100).parallel().forEach(i->{
