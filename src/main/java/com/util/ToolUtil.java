@@ -5,6 +5,8 @@
  **/
 package com.util;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,6 +25,56 @@ import java.util.regex.Pattern;
  * @author liushun
  */
 public class ToolUtil {
+
+    // /**
+    //  * 组合字符串
+    //  * @return 组合字符串
+    //  */
+    // public static String combinedString(String str1, String str2) {
+    //     String result = null;
+    //
+    //     if(StringUtils.isNotBlank(str1)) {
+    //         result = str1;
+    //     }
+    //
+    //     if(StringUtils.isNotBlank(str2)) {
+    //         result = result == null ? str1 : " " + str1;
+    //     }
+    //
+    //     return result;
+    // }
+
+    /**
+     * 组合字符串
+     * @return 组合字符串
+     */
+    public static String combinedString(String... strs) {
+        if(strs == null) {
+            return null;
+        }
+
+        String[] arr = strs;
+        StringBuilder result = null;
+        int len = strs.length;
+
+        for(int i = 0; i < len; ++i) {
+            String str = arr[i];
+
+            if(StringUtils.isEmpty(str)) {
+                continue;
+            }
+
+            if(result == null) {
+                result = new StringBuilder();
+                result.append(str);
+            } else {
+                result.append(" " + str);
+            }
+        }
+
+        return result != null ? result.toString() : null;
+    }
+
 
     public static String getUUID() {
         String s = UUID.randomUUID().toString();

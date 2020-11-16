@@ -7,13 +7,7 @@ package com;
 
 import com.util.ToolUtil;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 interface ITest {
     /**
@@ -46,18 +40,49 @@ public class Test {
     private static LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
     public static void main(String[] args) {
-        System.out.println("测试冲突");
-        long threadId = Thread.currentThread().getId();
-        List<String> orderNos = Collections.synchronizedList(new ArrayList<String>());
-        // 并发操作
-        IntStream.range(0,100).parallel().forEach(i->{
-            orderNos.add(Thread.currentThread().getId() + "-" + LocalDateTime.now());
-        });
+        long start1 = System.currentTimeMillis();
 
-        List<String> filterOrderNos = orderNos.stream().distinct().collect(Collectors.toList());
+        for(int i = 0; i < 1000000; i++) {
+            ToolUtil.combinedString("123", "null");
+        }
 
-        System.out.println("总数："+orderNos.size());
-        System.out.println("过滤重复后总数："+filterOrderNos.size());
+        // System.out.println("123"+"null");
+
+        System.out.println("JSON.parseObject = " + ((System.currentTimeMillis() - start1)) + " millisecond");
+
+        //language=JSON
+        // String bankStr = "{\"Name\": \"123\", \"address\": \"456\", \"age\": 10}";
+        // // Bank bank = new Bank("123", "456", 10);
+        // Bank bank = JSON.parseObject(bankStr, Bank.class);
+        // System.out.println(bank);
+        // System.out.println(JSON.toJSONString(bank));
+
+        // System.out.println( JSONObject.toJavaObject(JSON.parseObject(bankStr), Bank.class));
+        //
+        // long start1 = System.currentTimeMillis();
+        // for(int i = 0; i < 1000000; i++) {
+        //     JSON.parseObject(bankStr, Bank.class);
+        // }
+        // System.out.println("JSON.parseObject = " + ((System.currentTimeMillis() - start1)) + " millisecond");
+        //
+        // start1 = System.currentTimeMillis();
+        // for(int i = 0; i < 1000000; i++) {
+        //     JSONObject.toJavaObject(JSON.parseObject(bankStr), Bank.class);
+        // }
+        // System.out.println("JSONObject.toJavaObject = " + ((System.currentTimeMillis() - start1)) + " millisecond");
+
+        // System.out.println("测试冲突");
+        // long threadId = Thread.currentThread().getId();
+        // List<String> orderNos = Collections.synchronizedList(new ArrayList<String>());
+        // // 并发操作
+        // IntStream.range(0,100).parallel().forEach(i->{
+        //     orderNos.add(Thread.currentThread().getId() + "-" + LocalDateTime.now());
+        // });
+        //
+        // List<String> filterOrderNos = orderNos.stream().distinct().collect(Collectors.toList());
+        //
+        // System.out.println("总数："+orderNos.size());
+        // System.out.println("过滤重复后总数："+filterOrderNos.size());
 
 
         // long threadId = Thread.currentThread().getId();
