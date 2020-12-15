@@ -5,9 +5,14 @@
  **/
 package com;
 
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
 import com.util.ToolUtil;
 
-import java.util.LinkedHashMap;
+import java.text.MessageFormat;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
 
 interface ITest {
     /**
@@ -39,16 +44,43 @@ public class Test {
 
     private static LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
-    public static void main(String[] args) {
-        long start1 = System.currentTimeMillis();
+    private static final Map<String, String> CONFIG_CACHE = new ConcurrentHashMap<>();
 
-        for(int i = 0; i < 1000000; i++) {
-            ToolUtil.combinedString("123", "null");
+    public static String sign(List<String> values, String ticket) {
+        if (values == null) {
+            throw new NullPointerException("values is null");
         }
 
-        // System.out.println("123"+"null");
+        // remove null
+        values.removeAll(Collections.singleton(null));
+        values.add(ticket);
+        java.util.Collections.sort(values);
 
-        System.out.println("JSON.parseObject = " + ((System.currentTimeMillis() - start1)) + " millisecond");
+        StringBuilder sb = new StringBuilder();
+        for (String s : values) {
+            sb.append(s);
+        }
+        return Hashing.sha1().hashString(sb, Charsets.UTF_8).toString().toUpperCase();
+    }
+
+    public static void main(String[] args) {
+        String format = MessageFormat.format("hello,{0}. I am {0}.", "arg0", "arg1");
+        System.out.println(format);
+
+        // ArrayList<String> list = new ArrayList<>();
+        // list.add("1");
+        // list.add("654654654");
+        // System.out.println(sign(list, "654654"));
+
+        // long start1 = System.currentTimeMillis();
+        //
+        // for(int i = 0; i < 1000000; i++) {
+        //     ToolUtil.combinedString("123", "null");
+        // }
+        //
+        // // System.out.println("123"+"null");
+        //
+        // System.out.println("JSON.parseObject = " + ((System.currentTimeMillis() - start1)) + " millisecond");
 
         //language=JSON
         // String bankStr = "{\"Name\": \"123\", \"address\": \"456\", \"age\": 10}";
